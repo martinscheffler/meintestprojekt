@@ -74,11 +74,15 @@ $(document).ready(function () {
     console.log('receive message' + message.data);
     try {
       var obj = JSON.parse(message.data);
-      if(!obj.time || !obj.temp1) {
+      if(!obj.time || (!obj.temp1 && !obj.temperature)) {
         return;
       }
       timeData.push(obj.time);
-      temperatureData.push(obj.temp1);
+	  if(obj.temp1) {
+		temperatureData.push(obj.temp1);
+	  } else {
+		  temperatureData.push(obj.temperature);
+	  }
       // only keep no more than 50 points in the line chart
       const maxLen = 50;
       var len = timeData.length;
