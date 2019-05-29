@@ -21,7 +21,7 @@ io.on('connection', function(socket){
 });
 
 // Broadcast to all.
-wss.broadcast = function broadcast(data) {
+wssbroadcast = function(data) {
   /*wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
       try {
@@ -40,7 +40,7 @@ iotHubReader.startReadMessage(function (obj, date) {
   try {
     console.log(date);
     date = date || Date.now()
-    wss.broadcast(JSON.stringify(Object.assign(obj, { time: moment.utc(date).format('YYYY:MM:DD[T]hh:mm:ss') })));
+    wssbroadcast(JSON.stringify(Object.assign(obj, { time: moment.utc(date).format('YYYY:MM:DD[T]hh:mm:ss') })));
   } catch (err) {
     console.log(obj);
     console.error(err);
