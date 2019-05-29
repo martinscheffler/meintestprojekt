@@ -13,11 +13,16 @@ app.use(function (req, res/*, next*/) {
 });
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+//const wss = new WebSocket.Server({ server });
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
 
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
-  wss.clients.forEach(function each(client) {
+  /*wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
       try {
         console.log('sending data ' + data);
@@ -26,7 +31,8 @@ wss.broadcast = function broadcast(data) {
         console.error(e);
       }
     }
-  });
+  });*/
+  io.emit("data", data);
 };
 
 var iotHubReader = new iotHubClient(process.env['Azure.IoT.IoTHub.ConnectionString'], process.env['Azure.IoT.IoTHub.ConsumerGroup']);

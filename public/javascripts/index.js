@@ -66,14 +66,14 @@ $(document).ready(function () {
     options: basicOption
   });
 
-  var ws = new WebSocket('wss://' + location.host);
+  /*var ws = new WebSocket('wss://' + location.host);
   ws.onopen = function () {
     console.log('Successfully connect WebSocket');
-  }
-  ws.onmessage = function (message) {
+  }*/
+  var wsonmessage = function (data) {
     console.log('receive message' + message.data);
     try {
-      var obj = JSON.parse(message.data);
+      var obj = JSON.parse(data);
       if(!obj.time || (!obj.temp1 && !obj.temperature)) {
         return;
       }
