@@ -75,7 +75,7 @@ $(document).ready(function () {
 
 
 wsonmessage = function (data) {
-  console.log('receive message' + message.data);
+  console.log('receive message' + data);
   try {
     var obj = JSON.parse(data);
     if(!obj.time || (!obj.temp1 && !obj.temperature)) {
