@@ -72,39 +72,42 @@ var timeData = [],
     console.log('Successfully connect WebSocket');
   }*/
   
+  var wsonmessage = function (data) {
+    console.log('receive message' + data);
+    try {
+      var obj = JSON.parse(data);
+      if(!obj.time || (!obj.temp1 && !obj.temperature)) {
+        return;
+      }
+      timeData.push(obj.time);
+    if(obj.temp1) {
+      temperatureData.push(obj.temp1);
+    } else {
+      temperatureData.push(obj.temperature);
+    }
+      // only keep no more than 50 points in the line chart
+      const maxLen = 50;
+      var len = timeData.length;
+      if (len > maxLen) {
+        timeData.shift();
+        temperatureData.shift();
+      }
+
+      if (obj.humidity) {
+        humidityData.push(obj.humidity);
+      }
+      if (humidityData.length > maxLen) {
+        humidityData.shift();
+      }
+
+      myLineChart.update();
+    } catch (err) {
+      console.error(err);
+    }
+  }  
+
+  var socket = io();
+  socket.on('data', wsonmessage);
+
 });
 
-
-wsonmessage = function (data) {
-  console.log('receive message' + data);
-  try {
-    var obj = JSON.parse(data);
-    if(!obj.time || (!obj.temp1 && !obj.temperature)) {
-      return;
-    }
-    timeData.push(obj.time);
-  if(obj.temp1) {
-    temperatureData.push(obj.temp1);
-  } else {
-    temperatureData.push(obj.temperature);
-  }
-    // only keep no more than 50 points in the line chart
-    const maxLen = 50;
-    var len = timeData.length;
-    if (len > maxLen) {
-      timeData.shift();
-      temperatureData.shift();
-    }
-
-    if (obj.humidity) {
-      humidityData.push(obj.humidity);
-    }
-    if (humidityData.length > maxLen) {
-      humidityData.shift();
-    }
-
-    myLineChart.update();
-  } catch (err) {
-    console.error(err);
-  }
-}
