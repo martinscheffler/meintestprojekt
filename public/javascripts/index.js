@@ -50,7 +50,7 @@ var timeData = [],
         backgroundColor: "rgba(204, 255, 128, 1)",
         pointHoverBackgroundColor: "rgba(204, 255, 128, 1)",
         pointHoverBorderColor: "rgba(204, 255, 128, 1)",
-        data: acc1Data
+        data: acc2Data
       }
     ]
   }
