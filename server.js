@@ -23,8 +23,8 @@ io.on('connection', function(socket){
 wssbroadcast = function(data) {
   io.emit("data", data);
 };
-var cs = process.env['Azure.IoT.IoTHub.ConnectionString'];
-var cg = process.env['Azure.IoT.IoTHub.ConsumerGroup'];
+var cs = process.env.ConnectionString;
+var cg = process.env.ConsumerGroup;
 console.log("Connecting to azure iothub. Connection string: " + cs + " Consumer group: " + cg);
 var iotHubReader = new iotHubClient(cs, cg);
 iotHubReader.startReadMessage(function (obj, date) {
