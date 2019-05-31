@@ -74,6 +74,10 @@ var timeData = [],
   
   var wsonmessage = function (data) {
     console.log('receive message' + data);
+    if(data.deviceid != "Pump1Device") {
+      console.log("Ignoring data for device " + data.deviceid);
+      return;
+    }
     try {
       var obj = JSON.parse(data);
       if(!obj.time || (!obj.temp1 && !obj.temperature)) {
