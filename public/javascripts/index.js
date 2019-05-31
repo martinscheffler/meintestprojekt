@@ -125,11 +125,17 @@ var timeData = [],
         temperatureData.shift();
       }
 
-      if (obj.humidity) {
-        humidityData.push(obj.humidity);
+      if (temp1Data.length > maxLen) {
+        temp1Data.shift();
       }
-      if (humidityData.length > maxLen) {
-        humidityData.shift();
+      if (temp2Data.length > maxLen) {
+        temp2Data.shift();
+      }
+      if (acc1Data.length > maxLen) {
+        acc1Data.shift();
+      }
+      if (acc2Data.length > maxLen) {
+        acc2Data.shift();
       }
 
       myLineChart.update();
