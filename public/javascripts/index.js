@@ -58,7 +58,7 @@ var timeData = [],
   var basicOption = {
     title: {
       display: true,
-      text: 'Temperature Real-time Data',
+      text: 'T-Systems Pump Showcase Real-time Data',
       fontSize: 36
     },
     scales: {
