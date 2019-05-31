@@ -1,6 +1,8 @@
 var timeData = [],
-    temperatureData = [],
-    humidityData = [];
+    temp1Data = [],
+    temp2Data = [],
+    acc1Data = [],
+    acc2Data = [];
   
     $(document).ready(function () {
   var data = {
@@ -8,25 +10,47 @@ var timeData = [],
     datasets: [
       {
         fill: false,
-        label: 'Temperature',
+        label: 'Temperature Heater',
         yAxisID: 'Temperature',
         borderColor: "rgba(255, 204, 0, 1)",
         pointBoarderColor: "rgba(255, 204, 0, 1)",
         backgroundColor: "rgba(255, 204, 0, 0.4)",
         pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
         pointHoverBorderColor: "rgba(255, 204, 0, 1)",
-        data: temperatureData
+        data: temp1Data
       },
       {
         fill: false,
-        label: 'Humidity',
-        yAxisID: 'Humidity',
-        borderColor: "rgba(24, 120, 240, 1)",
-        pointBoarderColor: "rgba(24, 120, 240, 1)",
-        backgroundColor: "rgba(24, 120, 240, 0.4)",
-        pointHoverBackgroundColor: "rgba(24, 120, 240, 1)",
-        pointHoverBorderColor: "rgba(24, 120, 240, 1)",
-        data: humidityData
+        label: 'Temperature Pump',
+        yAxisID: 'Temperature',
+        borderColor: "rgba(204, 255, 0, 1)",
+        pointBoarderColor: "rgba(204, 255, 0, 1)",
+        backgroundColor: "rgba(204, 255, 0, 0.4)",
+        pointHoverBackgroundColor: "rgba(204, 255, 0, 1)",
+        pointHoverBorderColor: "rgba(204, 255, 0, 1)",
+        data: temp2Data
+      },
+      {
+        fill: false,
+        label: 'Acceleration Heater',
+        yAxisID: 'Acceleration',
+        borderColor: "rgba(255, 204, 128, 1)",
+        pointBoarderColor: "rgba(255, 204, 128, 1)",
+        backgroundColor: "rgba(255, 204, 128, 1)",
+        pointHoverBackgroundColor: "rgba(255, 204, 128, 1)",
+        pointHoverBorderColor: "rgba(255, 204, 128, 1)",
+        data: acc1Data
+      },
+      {
+        fill: false,
+        label: 'Acceleration Pump',
+        yAxisID: 'Acceleration',
+        borderColor: "rgba(204, 255, 128, 1)",
+        pointBoarderColor: "rgba(204, 255, 128, 1)",
+        backgroundColor: "rgba(204, 255, 128, 1)",
+        pointHoverBackgroundColor: "rgba(204, 255, 128, 1)",
+        pointHoverBorderColor: "rgba(204, 255, 128, 1)",
+        data: acc1Data
       }
     ]
   }
@@ -34,7 +58,7 @@ var timeData = [],
   var basicOption = {
     title: {
       display: true,
-      text: 'Temperature & Humidity Real-time Data',
+      text: 'Temperature Real-time Data',
       fontSize: 36
     },
     scales: {
@@ -47,10 +71,10 @@ var timeData = [],
         },
         position: 'left',
       }, {
-          id: 'Humidity',
+          id: 'Acceleration',
           type: 'linear',
           scaleLabel: {
-            labelString: 'Humidity(%)',
+            labelString: 'Acceleration',
             display: true
           },
           position: 'right'
@@ -81,11 +105,18 @@ var timeData = [],
         return;
       }
       timeData.push(obj.time);
-    if(obj.temp1) {
-      temperatureData.push(obj.temp1);
-    } else {
-      temperatureData.push(obj.temperature);
-    }
+      if(obj.temp1) {
+        temp1Data.push(obj.temp1);
+      }
+      if(obj.temp2) {
+        temp2Data.push(obj.temp2);
+      } 
+      if(obj.acc1) {
+        acc1Data.push(obj.acc1);
+      }
+      if(obj.acc2) {
+        acc2Data.push(obj.acc2);
+      }
       // only keep no more than 50 points in the line chart
       const maxLen = 50;
       var len = timeData.length;
