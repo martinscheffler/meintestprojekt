@@ -70,7 +70,7 @@ $(document).ready(function () {
   ws.onopen = function () {
     console.log('Successfully connect WebSocket');
   }*/
-  var wsonmessage = function (data) {
+  wsonmessage = function (data) {
     console.log('receive message' + message.data);
     try {
       var obj = JSON.parse(data);
